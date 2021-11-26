@@ -19,7 +19,7 @@
         ]
     },
     "description": "ToC Trader and Sinopac SRV",
-    "editable": false,
+    "editable": true,
     "fiscalYearStartMonth": 0,
     "gnetId": null,
     "graphTooltip": 0,
@@ -28,12 +28,303 @@
     "liveNow": false,
     "panels": [
         {
-            "datasource": "LokiProduction",
+            "datasource": "PrometheusProduction",
             "gridPos": {
-                "h": 24,
-                "w": 12,
+                "h": 4,
+                "w": 4,
                 "x": 0,
                 "y": 0
+            },
+            "id": 18,
+            "options": {
+                "bgColor": "transparent",
+                "clockType": "24 hour",
+                "countdownSettings": {
+                    "endCountdownTime": "2021-11-25T19:34:51+08:00",
+                    "endText": "00:00:00"
+                },
+                "dateSettings": {
+                    "dateFormat": "YYYY-MM-DD",
+                    "fontSize": "40px",
+                    "fontWeight": "bold",
+                    "locale": "",
+                    "showDate": true
+                },
+                "mode": "time",
+                "refresh": "sec",
+                "timeSettings": {
+                    "fontSize": "40px",
+                    "fontWeight": "bold"
+                },
+                "timezone": "",
+                "timezoneSettings": {
+                    "fontSize": "12px",
+                    "fontWeight": "normal",
+                    "showTimezone": false,
+                    "zoneFormat": "offsetAbbv"
+                }
+            },
+            "pluginVersion": "1.2.0",
+            "title": "  ",
+            "transparent": true,
+            "type": "grafana-clock-panel"
+        },
+        {
+            "datasource": "TradeBotPostgreSQL",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [
+                        {
+                            "options": {
+                                "match": "null",
+                                "result": {
+                                    "index": 0,
+                                    "text": "0"
+                                }
+                            },
+                            "type": "special"
+                        }
+                    ],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 0
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 4,
+                "w": 4,
+                "x": 4,
+                "y": 0
+            },
+            "id": 14,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "limit": 1,
+                    "values": true
+                },
+                "text": {},
+                "textMode": "auto"
+            },
+            "pluginVersion": "8.2.5",
+            "targets": [
+                {
+                    "format": "table",
+                    "group": [],
+                    "metricColumn": "none",
+                    "rawQuery": true,
+                    "rawSql": "SELECT total FROM trade_balance WHERE date_part('year',trade_day) = date_part('year',now()) AND date_part('month',trade_day) = date_part('month',now()) AND date_part('day',trade_day) = date_part('day',now());",
+                    "refId": "A",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "value"
+                                ],
+                                "type": "column"
+                            }
+                        ]
+                    ],
+                    "timeColumn": "time",
+                    "where": [
+                        {
+                            "name": "$__timeFilter",
+                            "params": [],
+                            "type": "macro"
+                        }
+                    ]
+                }
+            ],
+            "title": "Today Balance",
+            "transparent": true,
+            "type": "stat"
+        },
+        {
+            "datasource": "TradeBotPostgreSQL",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "mappings": [
+                        {
+                            "options": {
+                                "match": "null",
+                                "result": {
+                                    "index": 0,
+                                    "text": "0"
+                                }
+                            },
+                            "type": "special"
+                        }
+                    ],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 0
+                            }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 4,
+                "w": 4,
+                "x": 8,
+                "y": 0
+            },
+            "id": 16,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "auto",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "limit": 1,
+                    "values": true
+                },
+                "text": {},
+                "textMode": "auto"
+            },
+            "pluginVersion": "8.2.5",
+            "targets": [
+                {
+                    "format": "table",
+                    "group": [],
+                    "metricColumn": "none",
+                    "rawQuery": true,
+                    "rawSql": "select sum(total) from trade_balance;",
+                    "refId": "A",
+                    "select": [
+                        [
+                            {
+                                "params": [
+                                    "value"
+                                ],
+                                "type": "column"
+                            }
+                        ]
+                    ],
+                    "timeColumn": "time",
+                    "where": [
+                        {
+                            "name": "$__timeFilter",
+                            "params": [],
+                            "type": "macro"
+                        }
+                    ]
+                }
+            ],
+            "title": "Total Balance(since 2021-11-24)",
+            "transparent": true,
+            "type": "stat"
+        },
+        {
+            "datasource": "PrometheusProduction",
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "decimals": 2,
+                    "mappings": [],
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            }
+                        ]
+                    },
+                    "unit": "KBs"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 5,
+                "w": 12,
+                "x": 12,
+                "y": 0
+            },
+            "id": 12,
+            "options": {
+                "colorMode": "value",
+                "graphMode": "area",
+                "justifyMode": "auto",
+                "orientation": "vertical",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "text": {},
+                "textMode": "value_and_name"
+            },
+            "pluginVersion": "8.2.5",
+            "targets": [
+                {
+                    "exemplar": false,
+                    "expr": "sum(rate(container_network_receive_bytes_total{name=~\"toc_trader|sinopac_srv\"}[1m]))/1024",
+                    "instant": false,
+                    "interval": "",
+                    "legendFormat": "RX",
+                    "refId": "A"
+                },
+                {
+                    "exemplar": true,
+                    "expr": "sum(rate(container_network_transmit_bytes_total{name=~\"toc_trader|sinopac_srv\"}[1m]))/1024",
+                    "hide": false,
+                    "interval": "",
+                    "legendFormat": "TX",
+                    "refId": "B"
+                }
+            ],
+            "title": "Network",
+            "transparent": true,
+            "type": "stat"
+        },
+        {
+            "datasource": "LokiProduction",
+            "gridPos": {
+                "h": 18,
+                "w": 12,
+                "x": 0,
+                "y": 4
             },
             "id": 2,
             "options": {
@@ -44,7 +335,7 @@
                 "showLabels": true,
                 "showTime": false,
                 "sortOrder": "Descending",
-                "wrapLogMessage": false
+                "wrapLogMessage": true
             },
             "targets": [
                 {
@@ -57,76 +348,7 @@
             "type": "logs"
         },
         {
-            "datasource": null,
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
-                    },
-                    "decimals": 2,
-                    "mappings": [],
-                    "max": 100,
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "green",
-                                "value": null
-                            },
-                            {
-                                "color": "red",
-                                "value": 80
-                            }
-                        ]
-                    },
-                    "unit": "percent"
-                },
-                "overrides": []
-            },
-            "gridPos": {
-                "h": 5,
-                "w": 12,
-                "x": 12,
-                "y": 0
-            },
-            "id": 8,
-            "options": {
-                "displayMode": "lcd",
-                "orientation": "horizontal",
-                "reduceOptions": {
-                    "calcs": [
-                        "lastNotNull"
-                    ],
-                    "fields": "",
-                    "values": false
-                },
-                "showUnfilled": true,
-                "text": {}
-            },
-            "pluginVersion": "8.2.5",
-            "targets": [
-                {
-                    "exemplar": false,
-                    "expr": "sum(rate(container_cpu_usage_seconds_total{name=~\"toc_trader|sinopac_srv\"}[1m])*100/8)",
-                    "interval": "",
-                    "legendFormat": "CPU",
-                    "refId": "A"
-                },
-                {
-                    "exemplar": true,
-                    "expr": "100*sum(container_memory_usage_bytes{name=~\"sinopac_srv|toc_trader\"})/sum(machine_memory_bytes)",
-                    "hide": false,
-                    "interval": "",
-                    "legendFormat": "Memory",
-                    "refId": "B"
-                }
-            ],
-            "title": "Performance",
-            "transparent": true,
-            "type": "bargauge"
-        },
-        {
-            "datasource": null,
+            "datasource": "PrometheusProduction",
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -181,7 +403,7 @@
                 "overrides": []
             },
             "gridPos": {
-                "h": 8,
+                "h": 10,
                 "w": 12,
                 "x": 12,
                 "y": 5
@@ -206,12 +428,12 @@
                     "refId": "A"
                 }
             ],
-            "title": "CPU Usage",
+            "title": "Container CPU Usage",
             "transparent": true,
             "type": "timeseries"
         },
         {
-            "datasource": null,
+            "datasource": "PrometheusProduction",
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -265,10 +487,10 @@
                 "overrides": []
             },
             "gridPos": {
-                "h": 8,
+                "h": 10,
                 "w": 12,
                 "x": 12,
-                "y": 13
+                "y": 15
             },
             "id": 6,
             "options": {
@@ -290,12 +512,12 @@
                     "refId": "A"
                 }
             ],
-            "title": "Memory Usage",
+            "title": "Container Memory Usage",
             "transparent": true,
             "type": "timeseries"
         },
         {
-            "datasource": null,
+            "datasource": "PrometheusProduction",
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -303,31 +525,34 @@
                     },
                     "decimals": 2,
                     "mappings": [],
+                    "max": 100,
                     "thresholds": {
                         "mode": "absolute",
                         "steps": [
                             {
                                 "color": "green",
                                 "value": null
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
                             }
                         ]
                     },
-                    "unit": "KBs"
+                    "unit": "percent"
                 },
                 "overrides": []
             },
             "gridPos": {
                 "h": 3,
                 "w": 12,
-                "x": 12,
-                "y": 21
+                "x": 0,
+                "y": 22
             },
-            "id": 12,
+            "id": 8,
             "options": {
-                "colorMode": "value",
-                "graphMode": "area",
-                "justifyMode": "auto",
-                "orientation": "vertical",
+                "displayMode": "gradient",
+                "orientation": "horizontal",
                 "reduceOptions": {
                     "calcs": [
                         "lastNotNull"
@@ -335,34 +560,33 @@
                     "fields": "",
                     "values": false
                 },
-                "text": {},
-                "textMode": "value_and_name"
+                "showUnfilled": true,
+                "text": {}
             },
             "pluginVersion": "8.2.5",
             "targets": [
                 {
                     "exemplar": false,
-                    "expr": "sum(rate(container_network_receive_bytes_total{name=~\"toc_trader|sinopac_srv\"}[1m]))/1024",
-                    "instant": false,
+                    "expr": "sum(rate(container_cpu_usage_seconds_total{name!=\"\"}[1m])*100/8)",
                     "interval": "",
-                    "legendFormat": "RX",
+                    "legendFormat": "CPU",
                     "refId": "A"
                 },
                 {
                     "exemplar": true,
-                    "expr": "sum(rate(container_network_transmit_bytes_total{name=~\"toc_trader|sinopac_srv\"}[1m]))/1024",
+                    "expr": "100*sum(container_memory_usage_bytes{name!=\"\"})/sum(machine_memory_bytes)",
                     "hide": false,
                     "interval": "",
-                    "legendFormat": "TX",
+                    "legendFormat": "Memory",
                     "refId": "B"
                 }
             ],
-            "title": "Network",
+            "title": "Performance",
             "transparent": true,
-            "type": "stat"
+            "type": "bargauge"
         }
     ],
-    "refresh": "5s",
+    "refresh": "10s",
     "schemaVersion": 32,
     "style": "dark",
     "tags": [
@@ -379,5 +603,5 @@
     "timezone": "",
     "title": "TradeBot Monitor",
     "uid": "fi2-vSp7z",
-    "version": 46
+    "version": 86
 }
