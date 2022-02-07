@@ -18,7 +18,7 @@
             }
         ]
     },
-    "description": "ToC Trader and Sinopac SRV",
+    "description": "TradeAgent",
     "editable": true,
     "fiscalYearStartMonth": 0,
     "gnetId": null,
@@ -92,7 +92,7 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "green",
+                                "color": "text",
                                 "value": null
                             },
                             {
@@ -299,7 +299,7 @@
             "targets": [
                 {
                     "exemplar": false,
-                    "expr": "sum(rate(container_network_receive_bytes_total{name=~\"toc_trader|sinopac_srv\"}[1m]))/1024",
+                    "expr": "sum(rate(container_network_receive_bytes_total{name=~\"trade_agent|sinopac_mq_srv|trade_agent_mqtt\"}[1m]))/1024",
                     "instant": false,
                     "interval": "",
                     "legendFormat": "RX",
@@ -307,7 +307,7 @@
                 },
                 {
                     "exemplar": true,
-                    "expr": "sum(rate(container_network_transmit_bytes_total{name=~\"toc_trader|sinopac_srv\"}[1m]))/1024",
+                    "expr": "sum(rate(container_network_transmit_bytes_total{name=~\"trade_agent|sinopac_mq_srv|trade_agent_mqtt\"}[1m]))/1024",
                     "hide": false,
                     "interval": "",
                     "legendFormat": "TX",
@@ -339,7 +339,7 @@
             },
             "targets": [
                 {
-                    "expr": "{container_name=~\"sinopac_srv|toc_trader\"}",
+                    "expr": "{container_name=~\"trade_agent|sinopac_mq_srv|trade_agent_mqtt\"}",
                     "refId": "A"
                 }
             ],
@@ -422,7 +422,7 @@
             "targets": [
                 {
                     "exemplar": false,
-                    "expr": "sum(rate(container_cpu_usage_seconds_total{name=~\"toc_trader|sinopac_srv\"}[1m])*100/8) by (name)",
+                    "expr": "sum(rate(container_cpu_usage_seconds_total{name=~\"trade_agent|sinopac_mq_srv|trade_agent_mqtt\"}[1m])*100/8) by (name)",
                     "interval": "",
                     "legendFormat": "{{ name }}",
                     "refId": "A"
@@ -506,7 +506,7 @@
             "targets": [
                 {
                     "exemplar": false,
-                    "expr": "sum(container_memory_usage_bytes{name=~\"sinopac_srv|toc_trader\"}/1024/1024) by (name)",
+                    "expr": "sum(container_memory_usage_bytes{name=~\"trade_agent|sinopac_mq_srv|trade_agent_mqtt\"}/1024/1024) by (name)",
                     "interval": "",
                     "legendFormat": "{{ name }}",
                     "refId": "A"
@@ -603,5 +603,5 @@
     "timezone": "",
     "title": "TradeBot Monitor",
     "uid": "fi2-vSp7z",
-    "version": 86
+    "version": 100
 }

@@ -7,5 +7,9 @@
 ## Source Name
 
 - Prometheus(default): `PrometheusProduction`
-- Postgres: `TradeBotPostgreSQL`
+  - URL: `http://:9090`
 - Loki: `LokiProduction`
+  - URL: `http://:3100`
+
+- Postgres: `TradeBotPostgreSQL`
+  - URL: `http://:9090`
