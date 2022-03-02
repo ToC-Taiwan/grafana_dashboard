@@ -21,14 +21,16 @@
     "description": "TradeAgent",
     "editable": true,
     "fiscalYearStartMonth": 0,
-    "gnetId": null,
     "graphTooltip": 0,
-    "id": 1,
+    "id": 2,
     "links": [],
     "liveNow": false,
     "panels": [
         {
-            "datasource": "PrometheusProduction",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "HfjKPbA7k"
+            },
             "gridPos": {
                 "h": 4,
                 "w": 4,
@@ -70,7 +72,10 @@
             "type": "grafana-clock-panel"
         },
         {
-            "datasource": "TradeBotPostgreSQL",
+            "datasource": {
+                "type": "postgres",
+                "uid": "sR--PxAnz"
+            },
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -127,7 +132,7 @@
                 "text": {},
                 "textMode": "auto"
             },
-            "pluginVersion": "8.2.5",
+            "pluginVersion": "8.3.3",
             "targets": [
                 {
                     "format": "table",
@@ -161,7 +166,10 @@
             "type": "stat"
         },
         {
-            "datasource": "TradeBotPostgreSQL",
+            "datasource": {
+                "type": "postgres",
+                "uid": "sR--PxAnz"
+            },
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -218,7 +226,7 @@
                 "text": {},
                 "textMode": "auto"
             },
-            "pluginVersion": "8.2.5",
+            "pluginVersion": "8.3.3",
             "targets": [
                 {
                     "format": "table",
@@ -247,12 +255,91 @@
                     ]
                 }
             ],
-            "title": "Total Balance(since 2021-11-24)",
+            "title": "Total Balance(since 2022-01-01)",
             "transparent": true,
             "type": "stat"
         },
         {
-            "datasource": "PrometheusProduction",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "HfjKPbA7k"
+            },
+            "fieldConfig": {
+                "defaults": {
+                    "color": {
+                        "mode": "thresholds"
+                    },
+                    "decimals": 2,
+                    "mappings": [],
+                    "max": 100,
+                    "thresholds": {
+                        "mode": "percentage",
+                        "steps": [
+                            {
+                                "color": "green",
+                                "value": null
+                            },
+                            {
+                                "color": "#EAB839",
+                                "value": 40
+                            },
+                            {
+                                "color": "red",
+                                "value": 80
+                            }
+                        ]
+                    },
+                    "unit": "percent"
+                },
+                "overrides": []
+            },
+            "gridPos": {
+                "h": 4,
+                "w": 6,
+                "x": 12,
+                "y": 0
+            },
+            "id": 8,
+            "options": {
+                "displayMode": "gradient",
+                "orientation": "horizontal",
+                "reduceOptions": {
+                    "calcs": [
+                        "lastNotNull"
+                    ],
+                    "fields": "",
+                    "values": false
+                },
+                "showUnfilled": true,
+                "text": {}
+            },
+            "pluginVersion": "8.3.3",
+            "targets": [
+                {
+                    "exemplar": false,
+                    "expr": "sum(rate(container_cpu_usage_seconds_total{name!=\"\"}[1m])*100/8)",
+                    "interval": "",
+                    "legendFormat": "CPU",
+                    "refId": "A"
+                },
+                {
+                    "exemplar": true,
+                    "expr": "100*sum(container_memory_usage_bytes{name!=\"\"})/sum(machine_memory_bytes)",
+                    "hide": false,
+                    "interval": "",
+                    "legendFormat": "Memory",
+                    "refId": "B"
+                }
+            ],
+            "title": "Performance",
+            "transparent": true,
+            "type": "bargauge"
+        },
+        {
+            "datasource": {
+                "type": "prometheus",
+                "uid": "HfjKPbA7k"
+            },
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -274,9 +361,9 @@
                 "overrides": []
             },
             "gridPos": {
-                "h": 5,
-                "w": 12,
-                "x": 12,
+                "h": 4,
+                "w": 6,
+                "x": 18,
                 "y": 0
             },
             "id": 12,
@@ -295,7 +382,7 @@
                 "text": {},
                 "textMode": "value_and_name"
             },
-            "pluginVersion": "8.2.5",
+            "pluginVersion": "8.3.3",
             "targets": [
                 {
                     "exemplar": false,
@@ -319,10 +406,13 @@
             "type": "stat"
         },
         {
-            "datasource": "LokiProduction",
+            "datasource": {
+                "type": "loki",
+                "uid": "XaxtPb07z"
+            },
             "gridPos": {
-                "h": 18,
-                "w": 12,
+                "h": 10,
+                "w": 24,
                 "x": 0,
                 "y": 4
             },
@@ -330,12 +420,12 @@
             "options": {
                 "dedupStrategy": "none",
                 "enableLogDetails": true,
-                "prettifyLogMessage": true,
+                "prettifyLogMessage": false,
                 "showCommonLabels": false,
                 "showLabels": true,
                 "showTime": false,
                 "sortOrder": "Descending",
-                "wrapLogMessage": true
+                "wrapLogMessage": false
             },
             "targets": [
                 {
@@ -348,7 +438,10 @@
             "type": "logs"
         },
         {
-            "datasource": "PrometheusProduction",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "HfjKPbA7k"
+            },
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -405,8 +498,8 @@
             "gridPos": {
                 "h": 10,
                 "w": 12,
-                "x": 12,
-                "y": 5
+                "x": 0,
+                "y": 14
             },
             "id": 4,
             "options": {
@@ -433,7 +526,10 @@
             "type": "timeseries"
         },
         {
-            "datasource": "PrometheusProduction",
+            "datasource": {
+                "type": "prometheus",
+                "uid": "HfjKPbA7k"
+            },
             "fieldConfig": {
                 "defaults": {
                     "color": {
@@ -490,7 +586,7 @@
                 "h": 10,
                 "w": 12,
                 "x": 12,
-                "y": 15
+                "y": 14
             },
             "id": 6,
             "options": {
@@ -515,93 +611,25 @@
             "title": "Container Memory Usage",
             "transparent": true,
             "type": "timeseries"
-        },
-        {
-            "datasource": "PrometheusProduction",
-            "fieldConfig": {
-                "defaults": {
-                    "color": {
-                        "mode": "thresholds"
-                    },
-                    "decimals": 2,
-                    "mappings": [],
-                    "max": 100,
-                    "thresholds": {
-                        "mode": "absolute",
-                        "steps": [
-                            {
-                                "color": "green",
-                                "value": null
-                            },
-                            {
-                                "color": "red",
-                                "value": 80
-                            }
-                        ]
-                    },
-                    "unit": "percent"
-                },
-                "overrides": []
-            },
-            "gridPos": {
-                "h": 3,
-                "w": 12,
-                "x": 0,
-                "y": 22
-            },
-            "id": 8,
-            "options": {
-                "displayMode": "gradient",
-                "orientation": "horizontal",
-                "reduceOptions": {
-                    "calcs": [
-                        "lastNotNull"
-                    ],
-                    "fields": "",
-                    "values": false
-                },
-                "showUnfilled": true,
-                "text": {}
-            },
-            "pluginVersion": "8.2.5",
-            "targets": [
-                {
-                    "exemplar": false,
-                    "expr": "sum(rate(container_cpu_usage_seconds_total{name!=\"\"}[1m])*100/8)",
-                    "interval": "",
-                    "legendFormat": "CPU",
-                    "refId": "A"
-                },
-                {
-                    "exemplar": true,
-                    "expr": "100*sum(container_memory_usage_bytes{name!=\"\"})/sum(machine_memory_bytes)",
-                    "hide": false,
-                    "interval": "",
-                    "legendFormat": "Memory",
-                    "refId": "B"
-                }
-            ],
-            "title": "Performance",
-            "transparent": true,
-            "type": "bargauge"
         }
     ],
     "refresh": "10s",
-    "schemaVersion": 32,
+    "schemaVersion": 34,
     "style": "dark",
     "tags": [
-        "tradebot"
+        "trade_agent"
     ],
     "templating": {
         "list": []
     },
     "time": {
-        "from": "now-3h",
+        "from": "now-6h",
         "to": "now"
     },
     "timepicker": {},
     "timezone": "",
-    "title": "TradeBot Monitor",
+    "title": "TradeAgent Monitor",
     "uid": "fi2-vSp7z",
-    "version": 100
+    "version": 32,
+    "weekStart": ""
 }
