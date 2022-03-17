@@ -29,7 +29,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "mGNEsRPnz"
+                "uid": "Hd20acP7z"
             },
             "gridPos": {
                 "h": 4,
@@ -74,7 +74,7 @@
         {
             "datasource": {
                 "type": "postgres",
-                "uid": "Q-HsyREnk"
+                "uid": "eg_1-5Enz"
             },
             "fieldConfig": {
                 "defaults": {
@@ -168,7 +168,7 @@
         {
             "datasource": {
                 "type": "postgres",
-                "uid": "Q-HsyREnk"
+                "uid": "eg_1-5Enz"
             },
             "fieldConfig": {
                 "defaults": {
@@ -262,7 +262,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "mGNEsRPnz"
+                "uid": "Hd20acP7z"
             },
             "fieldConfig": {
                 "defaults": {
@@ -338,7 +338,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "mGNEsRPnz"
+                "uid": "Hd20acP7z"
             },
             "fieldConfig": {
                 "defaults": {
@@ -408,7 +408,7 @@
         {
             "datasource": {
                 "type": "loki",
-                "uid": "SvUPsgEnz"
+                "uid": "Wm71a5Pnz"
             },
             "gridPos": {
                 "h": 10,
@@ -440,7 +440,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "mGNEsRPnz"
+                "uid": "Hd20acP7z"
             },
             "fieldConfig": {
                 "defaults": {
@@ -528,7 +528,7 @@
         {
             "datasource": {
                 "type": "prometheus",
-                "uid": "mGNEsRPnz"
+                "uid": "Hd20acP7z"
             },
             "fieldConfig": {
                 "defaults": {
