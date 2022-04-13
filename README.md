@@ -18,3 +18,7 @@
   - Password: `asdf0000`
   - TLS: `disable`
   - Version: `12+`
+
+## Get all data sources
+
+- URL: `/api/datasources`(GET)
