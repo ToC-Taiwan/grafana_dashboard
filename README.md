@@ -6,10 +6,8 @@
 
 ## Source Name
 
-- Prometheus(default): `PrometheusProduction`
-  - URL: `http://172.20.10.72:9090`
-- Loki: `LokiProduction`
-  - URL: `http://172.20.10.82:3100`
+- Prometheus(default): `http://172.20.10.83:9090`
+- Loki: `http://172.20.10.82:3100`
 
 - Postgres: `TradeBotPostgreSQL`
   - Host: `172.20.10.10:5432`
